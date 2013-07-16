@@ -1,0 +1,30 @@
+#!/bin/bash
+STARTPWD="$PWD"
+[ -z $MAX_DEPTH ] && MAX_DEPTH=5
+DEPTH=0
+root="$PWD"
+
+for (( i=$DEPTH; i<=$MAX_DEPTH; i++ ))
+do
+    DEPTH=$i
+    if [ -d "$PWD/.tmsu" ]
+    then
+        root="$PWD"
+        break
+    else
+        cd ..
+    fi
+done
+
+cd "$STARTPWD"
+
+if [ ! -d "$root/.tmsu" ]
+then
+    [ $DEPTH -eq $MAX_DEPTH ] && echo "Max Depth Reached" >&2
+    echo "Unable to find tmsu root .tmsu" >&2
+    exit 1
+fi
+
+export TMSU_DB=$root/.tmsu/default.db
+tmsu $@
+
