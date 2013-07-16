@@ -1,0 +1,8 @@
+#!/bin/bash
+# maintains the tmsu tag database at the mountpoint
+mp=$(stat -c '%m' $PWD)
+
+mkdir -p "$mp/.tmsu/" || ( echo "unable to create $mp/.tmsu directory" >&2 ; exit 1 )
+export TMSU_DB="$mp/.tmsu/default.db"
+tmsu $@
+
