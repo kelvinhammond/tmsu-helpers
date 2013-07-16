@@ -8,3 +8,4 @@ leveraging http://www.tmsu.org/:
   a match expression (tags to match and not match) per album
 
 * mtmsu: manage the tmsu database from the mountpoint of the current directory
+* ltmsu: manage the tmsu database from a .tmsu which is above the current working directory
